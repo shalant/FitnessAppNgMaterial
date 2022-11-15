@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { ProductsService } from "./products.service";
 
 @Component({
     selector: 'app-products',
@@ -8,16 +9,24 @@ import { Component } from "@angular/core";
 export class ProductsComponent {
     productName = 'A Book';
     isDisabled = true;
-    products = ['A Book', 'A Tree']
+    products: string[] = []
 
-    constructor() {
+    constructor(private productsService: ProductsService) {
+        this.products = this.productsService.getProducts();
         setTimeout(() => {
             // this.productName = 'A Tree'
             this.isDisabled = false;
         }, 3000)
     }
 
-    onAddProduct() {
-        this.products.push(this.productName);
+    onAddProduct(form:any) {
+        if(form.valid) {
+        // this.products.push(form.value.productName);
+            this.productsService.addProduct(form.value.productName);
+        }
+    }
+
+    onRemoveProduct(productName: string) {
+        this.products =this.products.filter(p => p !== productName);
     }
 }
