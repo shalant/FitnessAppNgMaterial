@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +23,7 @@ import { StopTrainingComponent } from './training/current-training/stop-training
 import { AuthService } from './auth/auth.service';
 import { TrainingService } from './training/training.service';
 import {MatSort} from '@angular/material/sort';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -46,6 +49,8 @@ import {MatSort} from '@angular/material/sort';
     FormsModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [AuthService, TrainingService],
   bootstrap: [AppComponent],
